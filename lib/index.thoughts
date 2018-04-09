@@ -1,0 +1,16 @@
+makeMethod(method) {
+  return async (...args) => {
+    const params = args[args.length - 1];
+    //context?
+    return await fn.apply(this, [...other args, this.getOptions(params.query)]);
+  };
+}
+
+get: makeMethod((id, options) => {
+  return await this.Model.findById(id, options);
+});
+
+update: makeMethod((id, data, options) => {
+  const item = await this.get(id, options);
+  return await item.update(new this.Model(data).toJSON(), options);
+});
